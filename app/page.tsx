@@ -476,7 +476,7 @@ function Home() {
               .map((item, index) => (
                 <Skeleton
                   variant="rectangular"
-                  width={360}
+                  width={338}
                   height={408}
                   key={index}
                 />
@@ -497,13 +497,15 @@ function Home() {
       <Stack alignItems="center" justifyContent="center" sx={{ width: '100%' }}>
         <Pagination
           count={ads?.data.totalPages ?? 0}
-          page={ads?.data.currentPage}
+          page={(ads?.data.currentPage ?? 0) + 1}
           onChange={(_, page) => {
             setFilter((old) => ({
               ...old,
-              page,
+              page: page - 1,
             }));
           }}
+          variant="outlined"
+          shape="rounded"
         />
       </Stack>
     </Stack>

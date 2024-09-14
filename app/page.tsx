@@ -828,7 +828,16 @@ function Home() {
             sm: 8,
           }}
         >
-          <Stack gap="12px" flexDirection="row" alignItems="stretch">
+          <Stack
+            gap="12px"
+            flexDirection="row"
+            alignItems="stretch"
+            sx={(theme) => ({
+              [theme.breakpoints.down('md')]: {
+                flexWrap: 'wrap',
+              },
+            })}
+          >
             <FormControl fullWidth>
               <InputLabel id="property-type">Immobilientyp</InputLabel>
               <CustomSelect
@@ -904,7 +913,7 @@ function Home() {
           </Stack>
         </Grid2>
       </Grid2>
-      <Grid2 container spacing="40px">
+      <Grid2 container spacing="40px" justifyContent="center">
         {adsLoading
           ? Array(12)
               .fill(1)

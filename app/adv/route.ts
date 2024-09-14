@@ -33,7 +33,7 @@ export async function GET(req: NextRequest) {
     maxPrice?: string;
     minArea?: string;
     maxArea?: string;
-    rooms?: number;
+    rooms?: string;
     page?: number;
     limit?: number;
     search?: string;
@@ -50,7 +50,7 @@ export async function GET(req: NextRequest) {
 
   if (query.rooms) {
     condition.rooms = {
-      [Op.lte]: query.rooms,
+      [Op.in]: JSON.parse(query.rooms ?? '[]'),
     };
   }
 

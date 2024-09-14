@@ -112,11 +112,16 @@ const seed = async ({ count }: { count: number }) => {
   ];
 
   for (let i = 0; i < count; i++) {
+    const t = type[faker.number.int(type.length - 1)];
+
     arr.push({
       name: faker.lorem.words({ max: 6, min: 3 }),
-      type: type[faker.number.int(type.length - 1)],
+      type: t,
       property_type: propertyType[faker.number.int(propertyType.length - 1)],
-      price: faker.finance.amount(),
+      price:
+        t === 'kaufen'
+          ? faker.finance.amount({ min: 100000, max: 900000 })
+          : faker.finance.amount({ min: 700, max: 2500 }),
       area: faker.finance.amount({ max: 500 }),
       rooms: faker.number.int({ max: 8 }),
       lat: faker.location.latitude(),

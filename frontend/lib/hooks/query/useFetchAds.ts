@@ -40,7 +40,7 @@ export default function useFetchAds({ filter }: { filter: IFilter }) {
         maxPrice?: string;
         minArea?: string;
         maxArea?: string;
-        rooms?: string[];
+        rooms?: string;
         page?: number;
         limit?: number;
         search?: string;
@@ -73,7 +73,7 @@ export default function useFetchAds({ filter }: { filter: IFilter }) {
       }
 
       if (filter.rooms) {
-        params.rooms = filter.rooms;
+        params.rooms = JSON.stringify(filter.rooms);
       }
 
       if (filter.page) {

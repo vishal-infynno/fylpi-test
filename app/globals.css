@@ -1,13 +1,10 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --Dark-Slate-Green: #33443C;
+  --Seafoam-Green: #ABC0B6;
+  --Light-Taupe: "#E0DBD8";
+  --Coral: #F87A53;
+  --Charcoal: #31393D;
+  --Gray: #D8DDE0;
 }
 
 html,
@@ -33,10 +30,4 @@ body {
 a {
   color: inherit;
   text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
 }

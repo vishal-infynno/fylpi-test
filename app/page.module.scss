@@ -1,0 +1,67 @@
+.page {
+  padding: 30px 0;
+  background: var(--White, #fafafa);
+  max-width: 1160px;
+  margin: auto;
+
+  .filters {
+    width: 100%;
+
+    .subMenu {
+      height: 100%;
+      cursor: pointer;
+      padding: 12px;
+      border-radius: 4px;
+      border: 1px solid var(--Blue-Gray, #748790);
+    }
+  }
+
+  .card {
+    border-radius: 8px;
+    background: #f0f2f3;
+    font-family: var(--font-outfit);
+    overflow: hidden;
+    max-width: 360px;
+    cursor: pointer;
+
+    img {
+      object-fit: contain;
+    }
+
+    .content {
+      padding: 20px 24px;
+
+      .name {
+        text-transform: capitalize;
+        overflow: hidden;
+        color: var(--Charcoal, #31393d);
+        white-space: wrap;
+
+        /* Body Normal */
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 150%; /* 24px */
+      }
+
+      .info {
+        text-transform: capitalize;
+      }
+
+      .count {
+        color: var(--Blue-Gray, #748790);
+        text-align: right;
+
+        /* Body Normal */
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 150%; /* 24px */
+      }
+    }
+  }
+}
+
+.popoverMenu {
+  padding: 12px;
+}

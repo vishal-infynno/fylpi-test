@@ -9,16 +9,29 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/cache": "^11.13.1",
+    "@emotion/styled": "^11.13.0",
+    "@mui/material": "^6.1.0",
+    "@mui/material-nextjs": "^6.1.0",
+    "@tanstack/react-query": "^5.56.2",
+    "axios": "^1.7.7",
+    "next": "14.2.11",
+    "pg": "^8.12.0",
+    "pg-hstore": "^2.3.4",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.2.11"
+    "react-google-autocomplete": "^2.7.3",
+    "sass": "^1.78.0",
+    "sequelize": "^6.37.3"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@faker-js/faker": "^9.0.0",
     "@types/node": "^20",
+    "@types/pg": "^8.11.9",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
-    "eslint-config-next": "14.2.11"
+    "eslint-config-next": "14.2.11",
+    "typescript": "^5"
   }
 }

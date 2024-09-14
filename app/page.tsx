@@ -67,12 +67,20 @@ const PriceComponent = ({
       <Stack
         gap="6px"
         flexDirection="row"
+        alignItems="center"
         className={styles.subMenu}
         onClick={(e) => {
           setAnchorElPrice(e.currentTarget);
         }}
       >
-        <BodyCopy sx={{ flex: 1 }}>
+        <BodyCopy
+          sx={{
+            flex: 1,
+            textOverflow: 'ellipsis',
+            textWrap: 'nowrap',
+            overflow: 'hidden',
+          }}
+        >
           {filter.minPrice || filter.maxPrice
             ? [filter.minPrice || '-', filter.maxPrice || '-'].join(' , ')
             : 'Preis'}
@@ -167,12 +175,20 @@ const AreaComponent = ({
       <Stack
         gap="6px"
         flexDirection="row"
+        alignItems="center"
         className={styles.subMenu}
         onClick={(e) => {
           setAnchorEl(e.currentTarget);
         }}
       >
-        <BodyCopy sx={{ flex: 1 }}>
+        <BodyCopy
+          sx={{
+            flex: 1,
+            textOverflow: 'ellipsis',
+            textWrap: 'nowrap',
+            overflow: 'hidden',
+          }}
+        >
           {filter.minArea || filter.maxArea
             ? [filter.minArea || '-', filter.maxArea || '-'].join(' , ')
             : 'Fläche'}
@@ -320,11 +336,11 @@ function Home() {
       alignItems="flex-start"
       className={styles.page}
     >
-      <Grid2 container columnGap="12px" className={styles.filters}>
+      <Grid2 container spacing="12px" className={styles.filters}>
         <Grid2
           size={{
             xs: 12,
-            sm: 5,
+            sm: 4,
           }}
         >
           <CustomTextField
@@ -366,107 +382,81 @@ function Home() {
         </Grid2>
         <Grid2
           size={{
-            xs: 2,
-            sm: 2,
+            xs: 12,
+            sm: 8,
           }}
         >
-          <FormControl fullWidth>
-            <InputLabel id="property-type">Immobilientyp</InputLabel>
-            <CustomSelect
-              labelId="property-type"
-              label="Immobilientyp"
-              value={filter.type}
-              onChange={(e) => {
-                setFilter((old) => ({
-                  ...old,
-                  type: e.target.value as string,
-                }));
-              }}
-            >
-              {type.map((type, index) => (
-                <MenuItem value={type.value} key={index}>
-                  {type.name}
-                </MenuItem>
-              ))}
-            </CustomSelect>
-          </FormControl>
-        </Grid2>
-        <Grid2
-          size={{
-            xs: 2,
-            sm: 1,
-          }}
-        >
-          <FormControl fullWidth>
-            <InputLabel id="type">Typ</InputLabel>
-            <CustomSelect
-              labelId="type"
-              label="Typ"
-              value={filter.propertyType}
-              onChange={(e) => {
-                setFilter((old) => ({
-                  ...old,
-                  propertyType: e.target.value as string,
-                }));
-              }}
-            >
-              {propertyType.map((pType, index) => (
-                <MenuItem value={pType.value} key={index}>
-                  {pType.name}
-                </MenuItem>
-              ))}
-            </CustomSelect>
-          </FormControl>
-        </Grid2>
-        <Grid2
-          size={{
-            xs: 2,
-            sm: 1,
-          }}
-        >
-          <PriceComponent filter={filter} setFilter={setFilter} />
-        </Grid2>
-        <Grid2
-          size={{
-            xs: 2,
-            sm: 1,
-          }}
-        >
-          <AreaComponent filter={filter} setFilter={setFilter} />
-        </Grid2>
-        <Grid2
-          size={{
-            xs: 2,
-            sm: 1,
-          }}
-        >
-          <FormControl fullWidth>
-            <InputLabel id="rooms">Zimmer</InputLabel>
-            <CustomSelect
-              labelId="rooms"
-              label="Zimmer"
-              multiple
-              value={filter.rooms ?? []}
-              onChange={(e) => {
-                setFilter((old) => ({
-                  ...old,
-                  rooms: e.target.value as string[],
-                }));
-              }}
-            >
-              {Array(8)
-                .fill(1)
-                .map((item, index) => ({
-                  name: index + 1,
-                  value: index + 1,
-                }))
-                .map((item, index) => (
-                  <MenuItem key={index} value={item.value}>
-                    {item.name}
+          <Stack gap="12px" flexDirection="row" alignItems="stretch">
+            <FormControl fullWidth>
+              <InputLabel id="property-type">Immobilientyp</InputLabel>
+              <CustomSelect
+                labelId="property-type"
+                label="Immobilientyp"
+                value={filter.type}
+                onChange={(e) => {
+                  setFilter((old) => ({
+                    ...old,
+                    type: e.target.value as string,
+                  }));
+                }}
+              >
+                {type.map((type, index) => (
+                  <MenuItem value={type.value} key={index}>
+                    {type.name}
                   </MenuItem>
                 ))}
-            </CustomSelect>
-          </FormControl>
+              </CustomSelect>
+            </FormControl>
+            <FormControl fullWidth>
+              <InputLabel id="type">Typ</InputLabel>
+              <CustomSelect
+                labelId="type"
+                label="Typ"
+                value={filter.propertyType}
+                onChange={(e) => {
+                  setFilter((old) => ({
+                    ...old,
+                    propertyType: e.target.value as string,
+                  }));
+                }}
+              >
+                {propertyType.map((pType, index) => (
+                  <MenuItem value={pType.value} key={index}>
+                    {pType.name}
+                  </MenuItem>
+                ))}
+              </CustomSelect>
+            </FormControl>
+            <PriceComponent filter={filter} setFilter={setFilter} />
+            <AreaComponent filter={filter} setFilter={setFilter} />
+            <FormControl fullWidth>
+              <InputLabel id="rooms">Zimmer</InputLabel>
+              <CustomSelect
+                labelId="rooms"
+                label="Zimmer"
+                multiple
+                value={filter.rooms ?? []}
+                onChange={(e) => {
+                  setFilter((old) => ({
+                    ...old,
+                    rooms: e.target.value as string[],
+                  }));
+                }}
+              >
+                {Array(8)
+                  .fill(1)
+                  .map((item, index) => ({
+                    name: index + 1,
+                    value: index + 1,
+                  }))
+                  .map((item, index) => (
+                    <MenuItem key={index} value={item.value}>
+                      {item.name}
+                    </MenuItem>
+                  ))}
+              </CustomSelect>
+            </FormControl>
+          </Stack>
         </Grid2>
       </Grid2>
       <Grid2 container spacing="40px">
@@ -484,8 +474,9 @@ function Home() {
           : ads?.data.data.map((ad) => (
               <Grid2
                 size={{
-                  xs: 12,
-                  sm: 4,
+                  sm: 12,
+                  md: 6,
+                  lg: 4,
                 }}
                 key={ad.id}
               >

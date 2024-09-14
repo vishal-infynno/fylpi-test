@@ -1,16 +1,17 @@
 :root {
-  --Dark-Slate-Green: #33443C;
-  --Seafoam-Green: #ABC0B6;
-  --Light-Taupe: "#E0DBD8";
-  --Coral: #F87A53;
-  --Charcoal: #31393D;
-  --Gray: #D8DDE0;
+  --Dark-Slate-Green: #33443c;
+  --Seafoam-Green: #abc0b6;
+  --Light-Taupe: '#E0DBD8';
+  --Coral: #f87a53;
+  --Charcoal: #31393d;
+  --Gray: #d8dde0;
 }
 
 html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  background: var(--White, #fafafa);
 }
 
 body {

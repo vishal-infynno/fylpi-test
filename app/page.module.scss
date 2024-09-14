@@ -1,6 +1,5 @@
 .page {
   padding: 30px 16px;
-  background: var(--White, #fafafa);
   max-width: calc(1160px - 32px);
   margin: auto;
 
@@ -12,7 +11,10 @@
       cursor: pointer;
       padding: 12px;
       border-radius: 4px;
-      border: 1px solid var(--Blu e-Gray, #748790);
+      border: 1px solid #748790;
+      color: rgba(0, 0, 0, 0.87);
+      flex: 1;
+      height: 56px;
     }
   }
 
@@ -24,6 +26,7 @@
     max-width: 360px;
     cursor: pointer;
     height: 100%;
+    margin: auto;
 
     img {
       object-fit: contain;

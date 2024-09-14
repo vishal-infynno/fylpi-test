@@ -10,6 +10,7 @@ export interface IFilter {
   maxArea?: string;
   rooms?: string[];
   page?: number;
+  search?: string;
 }
 
 export interface IAdvertisement {
@@ -22,6 +23,7 @@ export interface IAdvertisement {
   rooms: number;
   lat: number;
   lng: number;
+  address: string;
   city: string;
   state: string;
   image: string;
@@ -41,6 +43,7 @@ export default function useFetchAds({ filter }: { filter: IFilter }) {
         rooms?: string[];
         page?: number;
         limit?: number;
+        search?: string;
       } = {
         limit: 12,
       };
@@ -75,6 +78,10 @@ export default function useFetchAds({ filter }: { filter: IFilter }) {
 
       if (filter.page) {
         params.page = filter.page;
+      }
+
+      if (filter.search) {
+        params.search = filter.search;
       }
 
       const res = await axios.get<{

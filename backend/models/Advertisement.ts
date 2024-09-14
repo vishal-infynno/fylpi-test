@@ -1,25 +1,25 @@
-"use strict";
+'use strict';
 
-import { DataTypes } from "sequelize";
-import { connection } from "../lib/database";
+import { DataTypes } from 'sequelize';
+import { connection } from '../lib/database';
 
 export const Advertisment = connection.define(
-  "adviertisment",
+  'adviertisment',
   {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     type: {
-      type: DataTypes.ENUM("kaufen", "mieten"),
+      type: DataTypes.ENUM('kaufen', 'mieten'),
       allowNull: false,
     },
     property_type: {
       type: DataTypes.ENUM(
-        "wohnung",
-        "haus",
-        "doppelhaushalfte",
-        "einzelhandelsimmobilie"
+        'wohnung',
+        'haus',
+        'doppelhaushalfte',
+        'einzelhandelsimmobilie',
       ),
       allowNull: false,
     },
@@ -40,6 +40,7 @@ export const Advertisment = connection.define(
       allowNull: false,
     },
     lng: { type: DataTypes.STRING, allowNull: false },
+    address: { type: DataTypes.STRING, allowNull: false },
     city: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -56,5 +57,5 @@ export const Advertisment = connection.define(
   {
     freezeTableName: true,
     timestamps: false,
-  }
+  },
 );

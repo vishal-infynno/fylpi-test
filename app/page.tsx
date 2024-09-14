@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import { queryClient } from '@/frontend/lib/api/react-query';
 import CustomSelect from '@/frontend/lib/components/form/CustomSelect';
@@ -10,6 +11,7 @@ import useFetchAds, {
   IFilter,
 } from '@/frontend/lib/hooks/query/useFetchAds';
 import {
+  Autocomplete,
   Box,
   FormControl,
   Grid2,
@@ -25,7 +27,6 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import Image from 'next/image';
 import { Dispatch, SetStateAction, useState } from 'react';
 import styles from './page.module.scss';
-
 const type = [
   {
     name: 'Kaufen',
@@ -42,6 +43,397 @@ const propertyType = [
   { name: 'Haus', value: 'haus' },
   { name: 'Doppelhaushalfte', value: 'doppelhaushalfte' },
   { name: 'Einzelhandelsimmobilie', value: 'einzelhandelsimmobilie' },
+];
+
+const places = [
+  {
+    name: 'Vienna',
+    value: 'vienna',
+  },
+  {
+    name: 'Graz',
+    value: 'graz',
+  },
+  {
+    name: 'Linz',
+    value: 'linz',
+  },
+  {
+    name: 'Salzburg',
+    value: 'salzburg',
+  },
+  {
+    name: 'Innsbruck',
+    value: 'innsbruck',
+  },
+  {
+    name: 'Klagenfurt',
+    value: 'klagenfurt',
+  },
+  {
+    name: 'Villach',
+    value: 'villach',
+  },
+  {
+    name: 'Wels',
+    value: 'wels',
+  },
+  {
+    name: 'St. Pölten',
+    value: 'st poelten',
+  },
+  {
+    name: 'Dornbirn',
+    value: 'dornbirn',
+  },
+  {
+    name: 'Steyr',
+    value: 'steyr',
+  },
+  {
+    name: 'Feldkirch',
+    value: 'feldkirch',
+  },
+  {
+    name: 'Bregenz',
+    value: 'bregenz',
+  },
+  {
+    name: 'Leonding',
+    value: 'leonding',
+  },
+  {
+    name: 'Klosterneuburg',
+    value: 'klosterneuburg',
+  },
+  {
+    name: 'Baden',
+    value: 'baden',
+  },
+  {
+    name: 'Wolfsberg',
+    value: 'wolfsberg',
+  },
+  {
+    name: 'Krems an der Donau',
+    value: 'krems an der donau',
+  },
+  {
+    name: 'Traun',
+    value: 'traun',
+  },
+  {
+    name: 'Amstetten',
+    value: 'amstetten',
+  },
+  {
+    name: 'Lustenau',
+    value: 'lustenau',
+  },
+  {
+    name: 'Kapfenberg',
+    value: 'kapfenberg',
+  },
+  {
+    name: 'Mödling',
+    value: 'moedling',
+  },
+  {
+    name: 'Hallein',
+    value: 'hallein',
+  },
+  {
+    name: 'Kufstein',
+    value: 'kufstein',
+  },
+  {
+    name: 'Traiskirchen',
+    value: 'traiskirchen',
+  },
+  {
+    name: 'Schwechat',
+    value: 'schwechat',
+  },
+  {
+    name: 'Saalfelden am Steinernen Meer',
+    value: 'saalfelden am steinernen meer',
+  },
+  {
+    name: 'Tulln an der Donau',
+    value: 'tulln an der donau',
+  },
+  {
+    name: 'Perchtoldsdorf',
+    value: 'perchtoldsdorf',
+  },
+  {
+    name: 'Hohenems',
+    value: 'hohenems',
+  },
+  {
+    name: 'Hard',
+    value: 'hard',
+  },
+  {
+    name: 'Spittal an der Drau',
+    value: 'spittal an der drau',
+  },
+  {
+    name: 'Stockerau',
+    value: 'stockerau',
+  },
+  {
+    name: 'Ansfelden',
+    value: 'ansfelden',
+  },
+  {
+    name: 'Telfs',
+    value: 'telfs',
+  },
+  {
+    name: 'Bludenz',
+    value: 'bludenz',
+  },
+  {
+    name: 'Marchtrenk',
+    value: 'marchtrenk',
+  },
+  {
+    name: 'Brunn am Gebirge',
+    value: 'brunn am gebirge',
+  },
+  {
+    name: 'Bad Ischl',
+    value: 'bad ischl',
+  },
+  {
+    name: 'Bruck an der Mur',
+    value: 'bruck an der mur',
+  },
+  {
+    name: 'Schwaz',
+    value: 'schwaz',
+  },
+  {
+    name: 'Lienz',
+    value: 'lienz',
+  },
+  {
+    name: 'Eisenstadt',
+    value: 'eisenstadt',
+  },
+  {
+    name: 'Neunkirchen',
+    value: 'neunkirchen',
+  },
+  {
+    name: 'Götzis',
+    value: 'goetzis',
+  },
+  {
+    name: 'Mistelbach',
+    value: 'mistelbach',
+  },
+  {
+    name: 'Zwettl',
+    value: 'zwettl',
+  },
+  {
+    name: 'Korneuburg',
+    value: 'korneuburg',
+  },
+  {
+    name: 'Vöcklabruck',
+    value: 'voecklabruck',
+  },
+  {
+    name: 'Enns',
+    value: 'enns',
+  },
+  {
+    name: 'Sankt Johann im Pongau',
+    value: 'sankt johann im pongau',
+  },
+  {
+    name: 'Bischofshofen',
+    value: 'bischofshofen',
+  },
+  {
+    name: 'Waidhofen an der Ybbs',
+    value: 'waidhofen an der ybbs',
+  },
+  {
+    name: 'Gmunden',
+    value: 'gmunden',
+  },
+  {
+    name: 'Hollabrunn',
+    value: 'hollabrunn',
+  },
+  {
+    name: 'Gänserndorf',
+    value: 'gaenserndorf',
+  },
+  {
+    name: 'Weiz',
+    value: 'weiz',
+  },
+  {
+    name: 'Deutschlandsberg',
+    value: 'deutschlandsberg',
+  },
+  {
+    name: 'Trofaiach',
+    value: 'trofaiach',
+  },
+  {
+    name: 'Knittelfeld',
+    value: 'knittelfeld',
+  },
+  {
+    name: 'Melk',
+    value: 'melk',
+  },
+  {
+    name: 'Baden bei Wien',
+    value: 'baden bei wien',
+  },
+  {
+    name: 'Bad Vöslau',
+    value: 'bad voeslau',
+  },
+  {
+    name: 'Neusiedl am See',
+    value: 'neusiedl am see',
+  },
+  {
+    name: 'Sankt Veit an der Glan',
+    value: 'sankt veit an der glan',
+  },
+  {
+    name: 'Hainburg an der Donau',
+    value: 'hainburg an der donau',
+  },
+  {
+    name: 'Sankt Valentin',
+    value: 'sankt valentin',
+  },
+  {
+    name: 'Freistadt',
+    value: 'freistadt',
+  },
+  {
+    name: 'Murau',
+    value: 'murau',
+  },
+  {
+    name: 'Mürzzuschlag',
+    value: 'muerzzuschlag',
+  },
+  {
+    name: 'Wolkersdorf im Weinviertel',
+    value: 'wolkersdorf im weinviertel',
+  },
+  {
+    name: 'Leibnitz',
+    value: 'leibnitz',
+  },
+  {
+    name: 'Eferding',
+    value: 'eferding',
+  },
+  {
+    name: 'Groß-Enzersdorf',
+    value: 'gross enzersdorf',
+  },
+  {
+    name: 'Purkersdorf',
+    value: 'purkersdorf',
+  },
+  {
+    name: 'Ybbs an der Donau',
+    value: 'ybbs an der donau',
+  },
+  {
+    name: 'Bad Aussee',
+    value: 'bad aussee',
+  },
+  {
+    name: 'Wörgl',
+    value: 'woergl',
+  },
+  {
+    name: 'Radenthein',
+    value: 'radenthein',
+  },
+  {
+    name: 'Zell am See',
+    value: 'zell am see',
+  },
+  {
+    name: 'Ried im Innkreis',
+    value: 'ried im innkreis',
+  },
+  {
+    name: 'Gleisdorf',
+    value: 'gleisdorf',
+  },
+  {
+    name: 'Fohnsdorf',
+    value: 'fohnsdorf',
+  },
+  {
+    name: 'Ebenfurth',
+    value: 'ebenfurth',
+  },
+  {
+    name: 'Langenlois',
+    value: 'langenlois',
+  },
+  {
+    name: 'Mank',
+    value: 'mank',
+  },
+  {
+    name: 'Bad Radkersburg',
+    value: 'bad radkersburg',
+  },
+  {
+    name: 'Baden bei Wien',
+    value: 'baden bei wien',
+  },
+  {
+    name: 'Neulengbach',
+    value: 'neulengbach',
+  },
+  {
+    name: 'Litschau',
+    value: 'litschau',
+  },
+  {
+    name: 'Feldbach',
+    value: 'feldbach',
+  },
+  {
+    name: 'Gerasdorf bei Wien',
+    value: 'gerasdorf bei wien',
+  },
+  {
+    name: 'Grein',
+    value: 'grein',
+  },
+  {
+    name: 'Blindenmarkt',
+    value: 'blindenmarkt',
+  },
+  {
+    name: 'Deutsch-Wagram',
+    value: 'deutsch wagram',
+  },
+  {
+    name: 'Bruck an der Leitha',
+    value: 'bruck an der leitha',
+  },
 ];
 
 const PriceComponent = ({
@@ -274,9 +666,11 @@ const Card = ({ data }: { data: IAdvertisement }) => {
         <BodyCopy className={styles.name}>{data.name}</BodyCopy>
         <Stack flexDirection="column" gap="6px" className={styles.info}>
           <BodyCopySmall>
-            {[`ID: ${data.id}`, data.type, `${data.city} ${data.state}`].join(
-              ' | ',
-            )}
+            {[
+              `ID: ${data.id}`,
+              data.type,
+              `${data.address}, ${data.city}`,
+            ].join(' | ')}
           </BodyCopySmall>
           <BodyCopySmall>
             {[
@@ -328,6 +722,27 @@ function Home() {
 
   const { data: ads, isPending: adsLoading } = useFetchAds({ filter });
 
+  // NOTE: As I didn't have the api key to be used for test implementing simple city search
+  // const { ref } = usePlacesWidget<HTMLInputElement>({
+  //   apiKey: '',
+  //   onPlaceSelected: (place) => {
+  //     const city = place?.address_components
+  //       ?.find((data: any) => data.types.includes('locality'))
+  //       ?.long_name?.toLowerCase();
+
+  //     if (city) {
+  //       setFilter((old) => ({
+  //         ...old,
+  //         search: city,
+  //       }));
+  //     }
+  //   },
+  //   options: {
+  //     types: ['establishment', 'locality'],
+  //     // componentRestrictions: { country: 'at' },
+  //   },
+  // });
+
   return (
     <Stack
       flexDirection="column"
@@ -343,7 +758,7 @@ function Home() {
             sm: 4,
           }}
         >
-          <CustomTextField
+          {/* <CustomTextField
             label="Bundesland, Ort oder Postleitzahl"
             slotProps={{
               input: {
@@ -376,8 +791,28 @@ function Home() {
                     </svg>
                   </InputAdornment>
                 ),
+                inputProps: {
+                  ref: ref,
+                  inputRef: ref,
+                },
               },
             }}
+          /> */}
+          <Autocomplete
+            options={places}
+            getOptionLabel={(option) => option.name} // Display name in the input field
+            onChange={(event, newValue) =>
+              setFilter((old) => ({ ...old, search: newValue?.value }))
+            }
+            renderInput={(params) => (
+              <CustomTextField
+                {...params}
+                label="Bundesland, Ort oder Postleitzahl"
+              />
+            )}
+            isOptionEqualToValue={(option, value) =>
+              option.name.toLowerCase() === value.value.toLowerCase()
+            }
           />
         </Grid2>
         <Grid2

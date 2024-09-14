@@ -36,6 +36,7 @@ export async function GET(req: NextRequest) {
     rooms?: number;
     page?: number;
     limit?: number;
+    search?: string;
   } = Object.fromEntries(req.nextUrl.searchParams);
   const condition: any = {};
 
@@ -95,6 +96,12 @@ export async function GET(req: NextRequest) {
         },
       },
     ];
+  }
+
+  if (query.search) {
+    condition.city = {
+      [Op.iLike]: query.search.toLowerCase(),
+    };
   }
 
   const { limit, offset } = getPagination(query.page, query.limit);

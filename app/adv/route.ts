@@ -49,9 +49,12 @@ export async function GET(req: NextRequest) {
   }
 
   if (query.rooms) {
-    condition.rooms = {
-      [Op.in]: JSON.parse(query.rooms ?? '[]'),
-    };
+    const rooms = JSON.parse(query.rooms ?? '[]');
+    if (rooms.length > 0) {
+      condition.rooms = {
+        [Op.in]: JSON.parse(query.rooms ?? '[]'),
+      };
+    }
   }
 
   if (query.minArea) {

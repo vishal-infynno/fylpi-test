@@ -502,6 +502,7 @@ const PriceComponent = ({
             ...old,
             minPrice: tempFilter.minPrice,
             maxPrice: tempFilter.maxPrice,
+            page: 0,
           }));
         }}
         anchorOrigin={{
@@ -610,6 +611,7 @@ const AreaComponent = ({
             ...old,
             minArea: tempFilter.minArea,
             maxArea: tempFilter.maxArea,
+            page: 0,
           }));
         }}
         anchorOrigin={{
@@ -662,7 +664,12 @@ const Card = ({ data }: { data: IAdvertisement }) => {
   return (
     <Box className={styles.card}>
       <Image src={data.image} width={360} height={240} alt="pic" />
-      <Stack flexDirection="column" gap="12px" className={styles.content}>
+      <Stack
+        flexDirection="column"
+        gap="12px"
+        justifyContent="space-between"
+        className={styles.content}
+      >
         <BodyCopy className={styles.name}>{data.name}</BodyCopy>
         <Stack flexDirection="column" gap="6px" className={styles.info}>
           <BodyCopySmall>
@@ -802,7 +809,7 @@ function Home() {
             options={places}
             getOptionLabel={(option) => option.name} // Display name in the input field
             onChange={(event, newValue) =>
-              setFilter((old) => ({ ...old, search: newValue?.value }))
+              setFilter((old) => ({ ...old, search: newValue?.value, page: 0 }))
             }
             renderInput={(params) => (
               <CustomTextField
@@ -832,6 +839,7 @@ function Home() {
                   setFilter((old) => ({
                     ...old,
                     type: e.target.value as string,
+                    page: 0,
                   }));
                 }}
               >
@@ -852,6 +860,7 @@ function Home() {
                   setFilter((old) => ({
                     ...old,
                     propertyType: e.target.value as string,
+                    page: 0,
                   }));
                 }}
               >
@@ -875,6 +884,7 @@ function Home() {
                   setFilter((old) => ({
                     ...old,
                     rooms: e.target.value as string[],
+                    page: 0,
                   }));
                 }}
               >
